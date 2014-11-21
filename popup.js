@@ -27,13 +27,11 @@ function updateStatus(mess) {
 } // end updateStatus
 
 function addBlock(link) { // add block to local storage
-	var li;
+	var li = initLists();
 	var i;
 	var id = -1;
 	var whichList; // 1 for user, 2 for illust
 	var arr = link.split('=');
-	
-	li = initLists();
 
 	// parse link here
 	if (link.indexOf("member") != -1) { // check if user link
@@ -63,23 +61,32 @@ function addBlock(link) { // add block to local storage
 	}
 } // end addBlock
 
-function removeBlock(id) {
-	if (id.indexOf("user")) {
-		// parse id and div
-		// remove from user lists
-		// remove the style rule
+function removeBlock(id, type) {
+	// element that calls removeBlock will send this.id and type
+	var li = initLists();
+	var whichList;
+	
+	if (type === user) {
+		whichList = li.userList;
 	}
 	else {
-		// remove from illustration
-		// remove the style rule
+		whichList = li.illustList;
 	}
+	
+	for (i = 0; i < whichList.length; i++) { // check for thing
+		if (whichList[i] === id) {
+			break;
+		}
+	}
+	whichList.splice(i, 1);
+	localStorage.lists = JSON.stringify(li);
 }
 
 fuction removeAllBlock() {
-	lists = {
-		'userBlock': [],
-		'illustBlock': [];
-	}
+	localStorage.lists = JSON.stringify({
+		'userList': [],
+		'illustList': [];
+	});
 }
 
 function blockStuff() {
