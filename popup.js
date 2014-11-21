@@ -91,7 +91,17 @@ fuction removeAllBlock() {
 
 function blockStuff() {
 	// block stuff on page
-	
-	var pDoc = document.getElementById("myParagraph");
-	var parentDiv = pDoc.parentNode;
+	// add jquery
+	// loop
+		// for users: $( "a[data-user_id*="???"]" ).parent.empty();
+		// for illusts: $( "a[href*="???"]" ).parent.empty();
+}
+
+function updateList() 
+	// call this in initLists, addBlock, removeBlock, and removeAllBlock
+	// $("#currentblock").empty
+	// for everything in userList and illustList,
+	// add <div id="id">x (remove event) [user/ユーザー] id</div>
+	//     <div id="id">x (remove event) [illustration/イラスト] id</div>
+	// depending on what type it is
 }
