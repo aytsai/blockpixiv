@@ -14,7 +14,7 @@ function initLists() {
 	}
 	else { // parse the original lists
 		try {
-			li = JSON.parse (localStorage.settings);
+			li = JSON.parse (localStorage.lists);
 		} catch (e) {
 			li = lists;
 		}
@@ -53,7 +53,7 @@ function addBlock(link) { // add block to local storage
 			}
 		}
 		whichList.push(id);
-		localStorage.settings = JSON.stringify(li);
+		localStorage.lists = JSON.stringify(li);
 		updateStatus("Successfully blocked. ブロックは成功。");
 		return true;
 	}
