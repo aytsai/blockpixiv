@@ -1,0 +1,24 @@
+block one user
+block one image
+block already blocked user - warning!!
+block already blocked image - warning!!
+block nonexistent user - error!!
+block nonexistent image - error!!
+remove user
+remove image
+
+
+tag blocked
+x [user/ユーザー] id
+x [illustration/イラスト] id
+
+
+temporarily make the status bar green or red for error
+
+
+if string contains member
+	add to member array
+if string contains
+
+else
+	error error
