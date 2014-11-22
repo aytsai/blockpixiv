@@ -56,7 +56,7 @@ function addBlock(link) { // add block to local storage
 		return true;
 	}
 	else {
-		updateStatus("Invalid link/ID. このlink/IDは存在しません。");
+		updateStatus("Invalid user/illustration. このユーザ/イラストは存在しません。");
 		return false;
 	}
 } // end addBlock
