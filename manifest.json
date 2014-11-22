@@ -10,7 +10,7 @@
 		"all_frames": false,
 		"matches": ["<all_urls>"],
 		"exclude_matches": [],
-			"js": ["jquery-1.11.1.min.js"],
+			"js": ["jquery-1.11.1.min.js", "popup.js"],
 			"css": []
     }],
 	"browser_action": {

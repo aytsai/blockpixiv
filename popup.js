@@ -1,8 +1,8 @@
 var browser = 'Chrome';
 var lists = {
 	'userList': [],
-	'illustList': [];
-}
+	'illustList': []
+};
 
 // check if domain is pixiv
 
@@ -82,10 +82,10 @@ function removeBlock(id, type) {
 	localStorage.lists = JSON.stringify(li);
 }
 
-fuction removeAllBlock() {
+function removeAllBlock() {
 	localStorage.lists = JSON.stringify({
 		'userList': [],
-		'illustList': [];
+		'illustList': []
 	});
 	$("#currentblock").empty();
 }
@@ -122,3 +122,11 @@ function updateList() {
 	}
 	blockStuff();
 }
+
+function myAlert(){
+    alert('hello world');
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('bl').addEventListener('click', myAlert);
+});
