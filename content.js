@@ -15,11 +15,11 @@ function blockStuff() {
 		
 		for (i = 0; i < lists.userList.length; i++) {
 			id = lists.userList[i];
-			$( "a[data-user_id*=" + id + "]" ).parent().hide();
+			$( "a[data-user_id*=" + id + "]" ).parent().css('visibility','hidden');//hide();
 		}
 		for (i = 0; i < lists.illustList.length; i++) {
 			id = lists.illustList[i];
-			$( "a[href*=" + id + "]" ).parent().hide();
+			$( "a[href*=" + id + "]" ).parent().css('visibility','hidden');//hide();
 		}
 	});
 }
@@ -37,10 +37,12 @@ chrome.runtime.onMessage.addListener(
 			var id = arr[1];
 			var type = arr[0];
 			if (type == "u") { // user 
-				$("li[style$='display: none;'] > " + "a[data-user_id*=" + id + "]").parent().show();
+				$("li[style$='display: none;'] > "
+					+ "a[data-user_id*=" + id + "]").parent().css('visibility','visible');//show();
 			}
 			else {
-				$("li[style$='display: none;'] > " + "a[href*=" + id + "]").parent().show();
+				$("li[style$='display: none;'] > "
+					+ "a[href*=" + id + "]").parent().css('visibility','visible');//show();
 			}
 		}
 	}
