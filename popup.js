@@ -71,7 +71,7 @@ function removeBlock(id, type) {
 	var li = initLists();
 	var whichList;
 	
-	if (type === "user") {
+	if (type === "u") {
 		whichList = li.userList;
 	}
 	else {
@@ -84,9 +84,11 @@ function removeBlock(id, type) {
 		}
 	}
 	whichList.splice(i, 1);
-	$("#" + id).remove();
+	console.log("removing " + id);
+	bg.me(type + "-" + id);
 	updateStatus("<font color='gray'>Block removed. ブロックは削除されました。</font>");
 	localStorage.lists = JSON.stringify(li);
+	updateList();
 }
 
 function removeAllBlock() {
@@ -110,22 +112,29 @@ function updateList() {
 	$("#currentblock").empty();
 	for (i = 0; i < li.userList.length; i++) {
 		id = li.userList[i];
-		blockText += "<div class='blockfunu' id='" + id + "'><a href='#' class='nounderline'>x</a> [user/ユーザー] " + id + "</div>";
+		blockText += "<div id='" + id + "'><a href='#' class='nounderline'>x</a> [user/ユーザー] " + id + "</div>";
 	}
 	for (i = 0; i < li.illustList.length; i++) {
 		id = li.illustList[i];
-		blockText += "<div class='blockfuni' id='" + id + "'><a href='#' class='nounderline'>x</a> [illustration/イラスト] " + id + "</div>";
+		blockText += "<div id='" + id + "'><a href='#' class='nounderline'>x</a> [illustration/イラスト] " + id + "</div>";
 	}
+	
 	$("#currentblock").html(blockText);
 	
-	var els = document.getElementsByClassName('blockfunu');
-	for (i = 0; i < els.length; i++) {
-		els[i].addEventListener('click', function() {removeBlock(id, "user");});
+	for (i = 0; i < li.userList.length; i++) {
+		id = li.userList[i];
+		$("#" + id).on("click", function() { 
+			removeBlock(id, "u");
+			$("#" + id).remove();
+		});
+		console.log(id);
 	}
-	
-	els = document.getElementsByClassName('blockfuni');
-	for (i = 0; i < els.length; i++) {
-		els[i].addEventListener('click', function() {removeBlock(id, "illust");});
+	for (i = 0; i < li.illustList.length; i++) {
+		id = li.illustList[i];
+		$("#" + id).on("click", function() { 
+			removeBlock(id, "i");
+			$("#" + id).remove();
+		});	
 	}
 }
 
