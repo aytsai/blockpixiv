@@ -38,14 +38,15 @@ function addBlock() { // add block to local storage
 	var arr = link.split('=');
 
 	// parse link here
-	if (link.indexOf("member") != -1) { // check if user link
-		id = arr[1]; // user link splits once
-		whichList = li.userList;
-	} // end user check
-	else if (link.indexOf("illustration") != -1) { // check if illust link
+	if (link.indexOf("&illust_id=") != -1) { // check if illust link
 		id = arr[2]; // illust link splits twice
 		whichList = li.illustList;
 	} // end illust check
+	else if (link.indexOf("member.php?id=") != -1 ||
+				link.indexOf("member_illust.php?id=") != -1) { // check if user link
+		id = arr[1]; // user link splits once
+		whichList = li.userList;
+	} // end user check
 	
 	if (id != -1 || link.indexOf("pixiv.net") != -1) { // if valid link
 		for (i = 0; i < whichList.length; i++) { // check for duplicates
