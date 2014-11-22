@@ -2,7 +2,7 @@
 	"name": "Pixiv Block",
 	"version": "1.0",
 	"manifest_version": 2,
-	"description": "Block art you don't want to see while browsing on Pixiv. あなたが見たくないイラストをブロック。 (私の日本語はさいていです, すみません。 _(´□`」 ∠)_)",
+	"description": "Block/hide art you don't want to see while browsing on Pixiv. あなたが見たくないイラストをブロック/隠す。",
 	"background": {"scripts": ["background.js"]},
 	"icons": { "16" : "icon.png",
 			   "48" : "icon.png",

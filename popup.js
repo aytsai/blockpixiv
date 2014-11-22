@@ -79,12 +79,11 @@ function removeBlock(id, type) {
 	}
 	
 	for (i = 0; i < whichList.length; i++) { // check for thing
-		if (whichList[i] === id) {
+		if (whichList[i] == id) {
 			break;
 		}
 	}
 	whichList.splice(i, 1);
-	console.log("removing " + id);
 	bg.me(type + "-" + id);
 	updateStatus("<font color='gray'>Block removed. ブロックは削除されました。</font>");
 	localStorage.lists = JSON.stringify(li);
@@ -112,36 +111,30 @@ function updateList() {
 	$("#currentblock").empty();
 	for (i = 0; i < li.userList.length; i++) {
 		id = li.userList[i];
-		blockText += "<div id='" + id + "'><a href='#' class='nounderline'>x</a> [user/ユーザー] " + id + "</div>";
+		blockText += "<div id='u-" + id + "'><a href='#' class='nounderline' id='" + id + "'>x</a> [user/ユーザー] " + id + "</div>";
 	}
 	for (i = 0; i < li.illustList.length; i++) {
 		id = li.illustList[i];
-		blockText += "<div id='" + id + "'><a href='#' class='nounderline'>x</a> [illustration/イラスト] " + id + "</div>";
+		blockText += "<div id='i-" + id + "'><a href='#' class='nounderline' id='" + id + "'>x</a> [illustration/イラスト] " + id + "</div>";
 	}
 	
 	$("#currentblock").html(blockText);
-	
-	for (i = 0; i < li.userList.length; i++) {
-		id = li.userList[i];
-		$("#" + id).on("click", function() { 
-			removeBlock(id, "u");
-			$("#" + id).remove();
-		});
-		console.log(id);
-	}
-	for (i = 0; i < li.illustList.length; i++) {
-		id = li.illustList[i];
-		$("#" + id).on("click", function() { 
-			removeBlock(id, "i");
-			$("#" + id).remove();
-		});	
-	}
 }
 
 function initExt(){
 	updateList();
 	document.getElementById('rmvall').addEventListener('click', removeAllBlock); 
 	document.getElementById('bl').addEventListener('click', addBlock);
+	
+	$("#currentblock").on("click",".nounderline", function(e){
+        e.preventDefault();
+		var temp = $(this).parent('div').attr("id");
+		var arr = temp.split('-');
+		var id = arr[1];
+		var type = arr[0];
+		removeBlock(id, type);
+		$(this).parent('div').remove();
+    })
 }
 
 document.addEventListener('DOMContentLoaded',initExt);
