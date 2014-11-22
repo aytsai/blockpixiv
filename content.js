@@ -8,9 +8,7 @@ var lists = {
 function blockStuff() {
 	var i;
 	
-	console.log("i'm running");
-	
-	chrome.extension.sendMessage({method: "getLocalStorage", key: "status"}, function(response) {
+	chrome.runtime.sendMessage({method: "getLocalStorage", key: "status"}, function(response) {
 		lists = JSON.parse(response.data);
 		console.log(lists.userList);
 		
@@ -36,8 +34,5 @@ chrome.runtime.onMessage.addListener(
 	}
 );
 
-chrome.runtime.sendMessage({method: "getLocalStorage", key: "status"}, function(response) {
-	lists = JSON.parse(response.data);
-});
 
 document.onreadystatechange = function(){blockStuff();};
