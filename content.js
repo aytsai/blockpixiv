@@ -5,10 +5,6 @@ var lists = {
 	'illustList': []
 };
 
-chrome.runtime.sendMessage({method: "getLocalStorage", key: "status"}, function(response) {
-	lists = JSON.parse(response.data);
-});
-
 function blockStuff() {
 	var i;
 	
@@ -39,3 +35,9 @@ chrome.runtime.onMessage.addListener(
 		}
 	}
 );
+
+chrome.runtime.sendMessage({method: "getLocalStorage", key: "status"}, function(response) {
+	lists = JSON.parse(response.data);
+});
+
+document.onreadystatechange = function(){blockStuff();};
