@@ -91,6 +91,8 @@ function removeAllBlock() {
 }
 
 function blockStuff() {
+	var li = initLists();
+
 	// block stuff on page
 	for (i = 0; i < li.userList.length; i++) {
 		id = li.userList[i];
@@ -123,10 +125,12 @@ function updateList() {
 	blockStuff();
 }
 
-function myAlert(){
-    alert('hello world');
+function initExt(){
+	initLists();
+	updateList();
+	blockStuff();
+    var blBtn = document.getElementById('bl').addEventListener('click', function myAlert(){
+																			alert('hello world');});
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('bl').addEventListener('click', myAlert);
-});
+document.addEventListener('DOMContentLoaded',initExt);
