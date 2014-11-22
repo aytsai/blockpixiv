@@ -1,8 +1,9 @@
-var browser = 'Chrome';
 var lists = {
 	'userList': [],
 	'illustList': []
 };
+
+var bg = chrome.extension.getBackgroundPage();
 
 function initLists() {
 	var li;
@@ -57,7 +58,7 @@ function addBlock() { // add block to local storage
 		localStorage.lists = JSON.stringify(li);
 		updateList();
 		updateStatus("<font color='green'>Successfully blocked. ブロックは成功。</font>");
-		return true;
+		bg.me("block");
 	}
 	else {
 		updateStatus("<font color='red'>Invalid user/illustration. このユーザ/イラストは存在しません。</font>");
@@ -93,22 +94,9 @@ function removeAllBlock() {
 		'userList': [],
 		'illustList': []
 	});
-	$(":hidden").show(); // show all hidden elements on page
+	bg.me("unblock all");
 	updateStatus("<font color='gray'>All blocks removed. 全部のブロックは削除されました。</font>");
 	$("#currentblock").empty();
-}
-
-function blockStuff() {
-	var li = initLists();
-	// block stuff on page
-	for (i = 0; i < li.userList.length; i++) {
-		id = li.userList[i];
-		$( "a[data-user_id*=" + id + "]" ).parent().hide();
-	}
-	for (i = 0; i < li.illustList.length; i++) {
-		id = li.illustList[i];
-		$( "a[href*=" + id + "]" ).parent().hide();
-	}
 }
 
 function updateList() {
@@ -139,16 +127,16 @@ function updateList() {
 	for (i = 0; i < els.length; i++) {
 		els[i].addEventListener('click', function() {removeBlock(id, "illust");});
 	}
-	
-	blockStuff();
 }
 
 function initExt(){
 	initLists();
 	updateList();
+	
 	document.getElementById('rmvall').addEventListener('click', removeAllBlock); 
 	document.getElementById('bl').addEventListener('click', addBlock);
+	
+	bg.me("block");
 }
 
-blockStuff();
 document.addEventListener('DOMContentLoaded',initExt);

@@ -14,3 +14,7 @@ x [illustration/イラスト] id
 
 
 make sure to check if user or art actually exists
+
+remember to add unhide function to remove block
+
+"li[style$='display: none;']", add on the id filter to unhide one block
