@@ -4,8 +4,6 @@ var lists = {
 	'illustList': []
 };
 
-// check if domain is pixiv
-
 function initLists() {
 	var li;
 	
@@ -27,7 +25,7 @@ function updateStatus(mess) {
 	$("#status").html(mess);
 	$("#status").show();
 	document.getElementById('block').value="";
-	$("#status").delay(1300).fadeOut(1500);
+	$("#status").delay(1500).fadeOut(500);
 } // end updateStatus
 
 function addBlock() { // add block to local storage
@@ -72,7 +70,7 @@ function removeBlock(id, type) {
 	var li = initLists();
 	var whichList;
 	
-	if (type === user) {
+	if (type === "user") {
 		whichList = li.userList;
 	}
 	else {
@@ -85,6 +83,8 @@ function removeBlock(id, type) {
 		}
 	}
 	whichList.splice(i, 1);
+	$("#" + id).remove();
+	updateStatus("<font color='gray'>Block removed. ブロックは削除されました。</font>");
 	localStorage.lists = JSON.stringify(li);
 }
 
@@ -94,12 +94,12 @@ function removeAllBlock() {
 		'illustList': []
 	});
 	$(":hidden").show(); // show all hidden elements on page
+	updateStatus("<font color='gray'>All blocks removed. 全部のブロックは削除されました。</font>");
 	$("#currentblock").empty();
 }
 
 function blockStuff() {
 	var li = initLists();
-
 	// block stuff on page
 	for (i = 0; i < li.userList.length; i++) {
 		id = li.userList[i];
@@ -122,22 +122,33 @@ function updateList() {
 	$("#currentblock").empty();
 	for (i = 0; i < li.userList.length; i++) {
 		id = li.userList[i];
-		blockText += "<div id='" + id + "'>x (remove event) [user/ユーザー] " + id + "</div>";
+		blockText += "<div class='blockfunu' id='" + id + "'><a href='#' class='nounderline'>x</a> [user/ユーザー] " + id + "</div>";
 	}
 	for (i = 0; i < li.illustList.length; i++) {
 		id = li.illustList[i];
-		blockText += "<div id='" + id + "'>x (remove event) [illustration/イラスト] " + id + "</div>";
+		blockText += "<div class='blockfuni' id='" + id + "'><a href='#' class='nounderline'>x</a> [illustration/イラスト] " + id + "</div>";
 	}
 	$("#currentblock").html(blockText);
+	
+	var els = document.getElementsByClassName('blockfunu');
+	for (i = 0; i < els.length; i++) {
+		els[i].addEventListener('click', function() {removeBlock(id, "user");});
+	}
+	
+	els = document.getElementsByClassName('blockfuni');
+	for (i = 0; i < els.length; i++) {
+		els[i].addEventListener('click', function() {removeBlock(id, "illust");});
+	}
+	
 	blockStuff();
 }
 
 function initExt(){
 	initLists();
 	updateList();
-	blockStuff();
 	document.getElementById('rmvall').addEventListener('click', removeAllBlock); 
 	document.getElementById('bl').addEventListener('click', addBlock);
 }
 
+blockStuff();
 document.addEventListener('DOMContentLoaded',initExt);
