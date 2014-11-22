@@ -130,13 +130,9 @@ function updateList() {
 }
 
 function initExt(){
-	initLists();
 	updateList();
-	
 	document.getElementById('rmvall').addEventListener('click', removeAllBlock); 
 	document.getElementById('bl').addEventListener('click', addBlock);
-	
-	bg.me("block");
 }
 
 document.addEventListener('DOMContentLoaded',initExt);
