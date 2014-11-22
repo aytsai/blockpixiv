@@ -23,14 +23,19 @@ function initLists() {
 } // end initLists
 
 function updateStatus(mess) {
-	document.getElementsByName('Block')[0].placeholder=mess;
+	$("#status").empty();
+	$("#status").html(mess);
+	$("#status").show();
+	document.getElementById('block').value="";
+	$("#status").delay(1300).fadeOut(1500);
 } // end updateStatus
 
-function addBlock(link) { // add block to local storage
+function addBlock() { // add block to local storage
 	var li = initLists();
 	var i;
 	var id = -1;
 	var whichList; // 1 for user, 2 for illust
+	var link = document.getElementById("block").value;
 	var arr = link.split('=');
 
 	// parse link here
@@ -43,20 +48,21 @@ function addBlock(link) { // add block to local storage
 		whichList = li.illustList;
 	} // end illust check
 	
-	if (id != -1) { // if valid link
+	if (id != -1 || link.indexOf("pixiv.net") != -1) { // if valid link
 		for (i = 0; i < whichList.length; i++) { // check for duplicates
 			if (whichList[i] === id) {
-				updateStatus("Already blocked. すでにブロックされています。");
+				updateStatus("<font color='orange'>Already blocked. すでにブロックされています。</font>");
 				return false;
 			}
 		}
 		whichList.push(id);
 		localStorage.lists = JSON.stringify(li);
-		updateStatus("Successfully blocked. ブロックは成功。");
+		updateList();
+		updateStatus("<font color='green'>Successfully blocked. ブロックは成功。</font>");
 		return true;
 	}
 	else {
-		updateStatus("Invalid user/illustration. このユーザ/イラストは存在しません。");
+		updateStatus("<font color='red'>Invalid user/illustration. このユーザ/イラストは存在しません。</font>");
 		return false;
 	}
 } // end addBlock
@@ -87,6 +93,7 @@ function removeAllBlock() {
 		'userList': [],
 		'illustList': []
 	});
+	$(":hidden").show(); // show all hidden elements on page
 	$("#currentblock").empty();
 }
 
@@ -96,18 +103,17 @@ function blockStuff() {
 	// block stuff on page
 	for (i = 0; i < li.userList.length; i++) {
 		id = li.userList[i];
-		$( "a[data-user_id*=" + id + "]" ).parent.empty();
+		$( "a[data-user_id*=" + id + "]" ).parent().hide();
 	}
 	for (i = 0; i < li.illustList.length; i++) {
 		id = li.illustList[i];
-		( "a[href*=" + id + "]" ).parent.empty();
+		$( "a[href*=" + id + "]" ).parent().hide();
 	}
 }
 
 function updateList() {
 	// call this in initLists, addBlock, removeBlock
-	// inefficient - should not be called in addBlock?
-	// but should be okay because lists are small
+	// inefficient
 	var li = initLists();
 	var i;
 	var blockText = "";
@@ -122,6 +128,7 @@ function updateList() {
 		id = li.illustList[i];
 		blockText += "<div id='" + id + "'>x (remove event) [illustration/イラスト] " + id + "</div>";
 	}
+	$("#currentblock").html(blockText);
 	blockStuff();
 }
 
@@ -129,8 +136,8 @@ function initExt(){
 	initLists();
 	updateList();
 	blockStuff();
-    var blBtn = document.getElementById('bl').addEventListener('click', function myAlert(){
-																			alert('hello world');});
+	document.getElementById('rmvall').addEventListener('click', removeAllBlock); 
+	document.getElementById('bl').addEventListener('click', addBlock);
 }
 
 document.addEventListener('DOMContentLoaded',initExt);

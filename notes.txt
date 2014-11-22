@@ -13,12 +13,4 @@ x [user/ユーザー] id
 x [illustration/イラスト] id
 
 
-temporarily make the status bar green or red for error
-
-
-if string contains member
-	add to member array
-if string contains
-
-else
-	error error
+make sure to check if user or art actually exists

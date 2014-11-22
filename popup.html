@@ -7,36 +7,28 @@
 		<style type="text/css">
 			html, body{
 				width:415px;
-				height:320px;
+				height:300px;
 				overflow-y: scroll;
 				overflow-x: hidden;
-				margin:0px 0px 15px 0px;
-				padding:10px 20px 10px 10px;
+				margin:0px 0px 11px 0px;
+				padding:10px 20px 8px 10px;
 			}
 		</style>
 	</head>
 	<body>
-		<b>PSA: Regardless of sourcing or permission, you may not repost any art not made by you on Pixiv. Please respect the original artist, the Pixiv community, and site rules. The TOS can be found here for your perusal. (<a href="#">http://www.pixiv.net/terms.php</a>)</b>
+		<b>PSA: Regardless of sourcing or permission, you may not repost any art not made by you on Pixiv. (<a href="#">http://www.pixiv.net/terms.php</a>) Please respect the original artist and the Pixiv community.</b>
 	
 		<p>This extension will only block individual pictures or all pictures from a user. To block communications from a user, go to the following link. イラストそれともユーザー全部のイラストをブロックだけです。 ユーザアクセスブロックはここです。 (<a href="#">http://www.pixiv.net/setting_access_block.php</a>)
 		
-		<p>After removing a block, please refresh the page. ブロックは削除するあと、ページを更新ください。</p>
-		
 		<hr>
 
-		<p><input type="text" name="block" value="" size="38" placeholder="User, Illust. URL/ユーザー, イラストURL" class="input-block-user">  <button id="bl">Block/ブロック</button></p>
+		<p><div id="status"></div>
+		<input type="text" id="block" value="" size="38" placeholder="User, Illust. URL/ユーザー, イラストURL" class="input-block-user">  <button id="bl">Block/ブロック</button></p>
 		
 		<p><font size="1">user ex/ユーザー例 (http://www.pixiv.net/member.php?id=1)
 		<br>image ex/イラスト例 (http://www.pixiv.net/member_illust.php?mode=medium&illust_id=1)</font></p>
 		
-		<a href="#">remove all</a>
-		<div="currentblock">
-		<br>x [user/ユーザー] id
-		<br>x [user/ユーザー] id
-		<br>x [user/ユーザー] id
-		<br>x [user/ユーザー] id
-		<br>x [user/ユーザー] id
-		<br>x [user/ユーザー] id
-		<br>x [illustration/イラスト] id</div>
+		<a id="rmvall" href="#">remove all</a>
+		<div id="currentblock">testestestess</div>
 	</body>
 </html>
