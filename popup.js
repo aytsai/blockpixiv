@@ -87,21 +87,38 @@ fuction removeAllBlock() {
 		'userList': [],
 		'illustList': [];
 	});
+	$("#currentblock").empty();
 }
 
 function blockStuff() {
 	// block stuff on page
-	// add jquery
-	// loop
-		// for users: $( "a[data-user_id*="???"]" ).parent.empty();
-		// for illusts: $( "a[href*="???"]" ).parent.empty();
+	for (i = 0; i < li.userList.length; i++) {
+		id = li.userList[i];
+		$( "a[data-user_id*=" + id + "]" ).parent.empty();
+	}
+	for (i = 0; i < li.illustList.length; i++) {
+		id = li.illustList[i];
+		( "a[href*=" + id + "]" ).parent.empty();
+	}
 }
 
-function updateList() 
-	// call this in initLists, addBlock, removeBlock, and removeAllBlock
-	// $("#currentblock").empty
-	// for everything in userList and illustList,
-	// add <div id="id">x (remove event) [user/ユーザー] id</div>
-	//     <div id="id">x (remove event) [illustration/イラスト] id</div>
-	// depending on what type it is
+function updateList() {
+	// call this in initLists, addBlock, removeBlock
+	// inefficient - should not be called in addBlock?
+	// but should be okay because lists are small
+	var li = initLists();
+	var i;
+	var blockText = "";
+	var id = "";
+	
+	$("#currentblock").empty();
+	for (i = 0; i < li.userList.length; i++) {
+		id = li.userList[i];
+		blockText += "<div id='" + id + "'>x (remove event) [user/ユーザー] " + id + "</div>";
+	}
+	for (i = 0; i < li.illustList.length; i++) {
+		id = li.illustList[i];
+		blockText += "<div id='" + id + "'>x (remove event) [illustration/イラスト] " + id + "</div>";
+	}
+	blockStuff();
 }
